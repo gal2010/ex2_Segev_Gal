@@ -1,16 +1,29 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Console driver for the multithreaded Subset Sum solver.
+ * <p>
+ * Reads the numbers into an {@code ArrayList<Integer>}, starts two {@link ThreadCheckArray}
+ * threads that share one {@link SharedData}, and prints the solution vector if one exists.
+ * </p>
+ */
 public class TestThreadCheckArray {
+    /**
+     * Program entry point.
+     *
+     * @param args not used
+     */
     public static void main(String[] args) {
         try (Scanner input = new Scanner(System.in)) {
             Thread thread1, thread2;
             System.out.println("Enter array size");
-            int num  = input.nextInt();
-            int[] array = new int[num];
+            int num = input.nextInt();
+            ArrayList<Integer> array = new ArrayList<>();
             System.out.println("Enter numbers for array");
 
             for (int index = 0; index < num; index++)
-                array[index] = input.nextInt();
+                array.add(input.nextInt());
 
             System.out.println("Enter number");
             num = input.nextInt();
@@ -31,19 +44,19 @@ public class TestThreadCheckArray {
                 System.out.println("Sorry");
                 return;
             }
-            System.out.println("Solution for b : " + sd.getB() + ",n = " + sd.getArray().length);
+            System.out.println("Solution for b : " + sd.getB() + ",n = " + sd.getArray().size());
             System.out.print("I:    ");
-            for(int index = 0; index < sd.getArray().length ; index++)
+            for (int index = 0; index < sd.getArray().size(); index++)
                 System.out.print(index + "    ");
             System.out.println();
             System.out.print("A:    ");
-            for (int index : sd.getArray()) {
-                System.out.print(index);
+            for (int value : sd.getArray()) {
+                System.out.print(value);
                 int counter = 5;
                 while (true) {
-                    index = index / 10;
+                    value = value / 10;
                     counter--;
-                    if (index == 0) break;
+                    if (value == 0) break;
                 }
                 for (int i = 0; i < counter; i++) System.out.print(" ");
             }
